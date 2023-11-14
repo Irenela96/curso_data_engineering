@@ -1,32 +1,7 @@
 version: 2
 
 sources:
-
-  - name: google_sheets # name of the source 
-    schema: google_sheets # this is the schema our raw data lives in
-    database: ALUMNO3_DEV_BRONZE_DB # this is the name of our database
-
-    quoting:
-      database: false
-      schema: false
-      identifier: false
-
-    freshness:
-      warn_after: {count: 24, period: hour}
-      error_after: {count: 48, period: hour}
-
-    tables:
-
-      - name: budget
-        loaded_at_field: _fivetran_synced
-        columns:
-          - name: _row
-          - name: product_id
-          - name: quantity
-          - name: month
-          - name: _fivetran_synced
-
-  - name: sql_server_dbo # name of the source 
+  - name: sql_server_dbo # name of the source
     schema: sql_server_dbo # this is the schema our raw data lives in
     database: ALUMNO3_DEV_BRONZE_DB # this is the name of our database
 
@@ -36,11 +11,10 @@ sources:
       identifier: false
 
     freshness:
-      warn_after: {count: 24, period: hour}
-      error_after: {count: 48, period: hour}
+      warn_after: { count: 24, period: hour }
+      error_after: { count: 48, period: hour }
 
     tables:
-
       - name: addresses
         loaded_at_field: _fivetran_synced
         columns:
@@ -88,7 +62,7 @@ sources:
           - name: product_id
           - name: quantity
           - name: _fivetran_deleted
-      
+
       - name: products
         loaded_at_field: _fivetran_synced
         columns:
