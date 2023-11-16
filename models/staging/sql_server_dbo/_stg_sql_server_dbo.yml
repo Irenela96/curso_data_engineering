@@ -1,0 +1,250 @@
+version: 2
+
+models:
+  - name: stg_addresses
+    columns:
+      - name: address_id
+        description: ""
+        tests:
+          - not_null
+          - unique
+      - name: zipcode
+        description: ""
+        tests:
+          - not_null
+      - name: country
+        description: ""
+        tests:
+          - not_null
+      - name: address
+        description: ""
+        tests:
+          - not_null
+      - name: state
+        description: ""
+        tests:
+          - not_null
+      - name: _fivetran_deleted
+        description: ""
+
+  - name: stg_events
+    columns:
+      - name: event_id
+        description: ""
+        tests:
+          - not_null
+          - unique
+      - name: page_url
+        description: ""
+        tests:
+          - not_null
+      - name: event_type
+        description: ""
+        tests:
+          - not_null
+      - name: user_id
+        description: ""
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_users')
+              field: user_id
+      - name: product_id
+        description: ""
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_products')
+              field: product_id
+      - name: session_id
+        description: ""
+        tests:
+          - not_null
+      - name: created_at
+        description: ""
+        tests:
+          - not_null
+      - name: order_id
+        description: ""
+        tests:
+          - relationships:
+              to: ref('stg_order_items')
+              field: order_id
+          - not_null
+      - name: _fivetran_deleted
+        description: ""
+
+  - name: stg_orders
+    columns:
+      - name: order_id
+        description: ""
+        tests:
+          - not_null
+          - unique
+      - name: shipping_service
+        description: ""
+        tests:
+          - not_null
+      - name: shipping_cost
+        description: ""
+        tests:
+          - not_null
+      - name: address_id
+        description: ""
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_addresses')
+              field: address_id
+      - name: created_at
+        description: ""
+        tests:
+          - not_null
+      - name: promo_id
+        description: ""
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_promos')
+              field: promo_id
+      - name: estimated_delivery_at
+        description: ""
+        tests:
+          - not_null
+      - name: order_cost
+        description: ""
+        tests:
+          - not_null
+      - name: user_id
+        description: ""
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_users')
+              field: user_id
+      - name: order_total
+        description: ""
+        tests:
+          - not_null
+      - name: delivered_at
+        description: ""
+        tests:
+          - not_null
+      - name: tracking_id
+        description: ""
+        tests:
+          - not_null
+      - name: status
+        description: ""
+        tests:
+          - not_null
+      - name: _fivetran_deleted
+        description: ""
+
+  - name: stg_order_items
+    columns:
+      - name: order_id
+        description: ""
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_orders')
+              field: order_id
+      - name: product_id
+        description: ""
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_products')
+              field: product_id
+      - name: quantity
+        description: ""
+        tests:
+          - not_null
+      - name: _fivetran_deleted
+        description: ""
+
+  - name: stg_products
+    columns:
+      - name: product_id
+        description: ""
+        tests:
+          - not_null
+          - unique
+      - name: price
+        description: ""
+        tests:
+          - not_null
+      - name: name
+        description: ""
+        tests:
+          - not_null
+      - name: inventory
+        description: ""
+        tests:
+          - not_null
+      - name: _fivetran_deleted
+        description: ""
+
+  - name: stg_promos
+    columns:
+      - name: promo_id
+        description: ""
+        tests:
+          - not_null
+          - unique
+      - name: discount
+        description: ""
+        tests:
+          - not_null
+      - name: status
+        description: ""
+        tests:
+          - not_null
+      - name: _fivetran_deleted
+        description: ""
+
+  - name: stg_users
+    columns:
+      - name: user_id
+        description: ""
+        tests:
+          - not_null
+          - unique
+      - name: updated_at
+        description: ""
+        tests:
+          - not_null
+      - name: address_id
+        description: ""
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_addresses')
+              field: address_id
+      - name: last_name
+        description: ""
+        tests:
+          - not_null
+      - name: created_at
+        description: ""
+        tests:
+          - not_null
+      - name: phone_number
+        description: ""
+        tests:
+          - not_null
+      - name: total_orders
+        description: ""
+        tests:
+          - not_null
+      - name: first_name
+        description: ""
+        tests:
+          - not_null
+      - name: email
+        description: ""
+        tests:
+          - not_null
+      - name: _fivetran_deleted
+        description: ""

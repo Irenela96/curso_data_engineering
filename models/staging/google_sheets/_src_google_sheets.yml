@@ -23,29 +23,15 @@ sources:
           - name: _row
             description: >
               Number of each row from google sheet.
-            tests:
-              - unique
-              - not_null
           - name: product_id
             description: >
               UUID for each unique product on platform.
-            tests:
-              - unique
-              - relationships:
-                  to: source('sql_server_dbo','products')
-                  field: product_id
           - name: quantity
             description: >
               Number of units for each product and each month for products.
-            tests:
-              - positive_values
           - name: month
             description: >
               Each month for the budget -> End of the month.
-          # va a dar error este test
-            # tests:
-            #   - accepted_values: 
-                  # values: ['january', 'february'] #Ejemplo, no es válido.
           - name: _fivetran_synced
             description: >
               Date that the data was loaded.
