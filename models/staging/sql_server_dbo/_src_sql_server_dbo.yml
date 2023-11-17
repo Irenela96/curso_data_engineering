@@ -16,80 +16,185 @@ sources:
 
     tables:
       - name: addresses
+        description: "Nos indica las direcciones de los usuarios o de los pedidos"
         loaded_at_field: _fivetran_synced
         columns:
-          - name: address_id   
+          - name: address_id
+            data_type: varchar(256)
+            description: "Id de las direcciones"  
           - name: zipcode
+            data_type: number(38,0)
+            description: "Código postal"
           - name: country
+            data_type: varchar(256)
+            description: "País"
           - name: address
+            data_type: varchar(256)
+            description: "Dirección más en detalle de la dirección. Ej: Calle principal, 1"
           - name: state
+            data_type: varchar(256)
+            description: "Estado en el que se encuentra dicha dirección. Ej: Virginia"
           - name: _fivetran_deleted
+            data_type: boolean
+            description: "Momento en el que se borró el registro en fivetran"
       - name: events
         loaded_at_field: _fivetran_synced
         columns:
           - name: event_id
+            data_type: varchar(1024)
+            description: ""
           - name: page_url
+            data_type: varchar(1024)
+            description: ""
           - name: event_type
+            data_type: varchar(1024)
+            description: ""
           - name: user_id
+            data_type: varchar(1024)
+            description: ""
           - name: product_id
+            data_type: varchar(1024)
+            description: ""
           - name: session_id
+            data_type: varchar(1024)
+            description: ""
           - name: created_at
+            data_type: timestamp_ntz(9)
+            description: ""
           - name: order_id
+            data_type: varchar(1024)
+            description: ""
           - name: _fivetran_deleted
+            data_type: boolean
+            description: ""
 
       - name: orders
         loaded_at_field: _fivetran_synced
         columns:
           - name: order_id
+            data_type: varchar(256)
+            description: ""
           - name: shipping_service
+            data_type: varchar(256)
+            description: ""
           - name: shipping_cost
+            data_type: float
+            description: ""
           - name: address_id
+            data_type: varchar(256)
+            description: ""
           - name: created_at
+            data_type: timestamp_ntz(9)
+            description: ""
           - name: promo_id
+            data_type: varchar(256)
+            description: ""
           - name: estimated_delivery_at
+            data_type: timestamp_ntz(9)
+            description: ""
           - name: order_cost
+            data_type: float
+            description: ""
           - name: user_id
+            data_type: varchar(256)
+            description: ""
           - name: order_total
+            data_type: float
+            description: ""
           - name: delivered_at
+            data_type: timestamp_ntz(9)
+            description: ""
           - name: tracking_id
+            data_type: varchar(256)
+            description: ""
           - name: status
+            data_type: varchar(256)
+            description: ""
           - name: _fivetran_deleted
+            data_type: boolean
+            description: ""
 
       - name: order_items
         loaded_at_field: _fivetran_synced
         columns:
           - name: order_id
+            data_type: varchar(256)
+            description: ""
           - name: product_id
+            data_type: varchar(256)
+            description: ""
           - name: quantity
+            data_type: number(38,0)
+            description: ""
           - name: _fivetran_deleted
+            data_type: boolean
+            description: ""
 
       - name: products
         loaded_at_field: _fivetran_synced
         columns:
           - name: product_id
+            data_type: varchar(256)
+            description: ""
           - name: price
+            data_type: float
+            description: ""
           - name: name
+            data_type: varchar(256)
+            description: ""
           - name: inventory
+            data_type: number(38,0)
+            description: ""
           - name: _fivetran_deleted
+            data_type: boolean
+            description: ""
 
       - name: promos
         loaded_at_field: _fivetran_synced
         columns:
           - name: promo_id
+            data_type: varchar(256)
+            description: ""
           - name: discount
+            data_type: number(38,0)
+            description: ""
           - name: status
+            data_type: varchar(256)
+            description: ""
           - name: _fivetran_deleted
+            data_type: boolean
+            description: ""
 
       - name: users
         loaded_at_field: _fivetran_synced
         columns:
           - name: user_id
+            data_type: varchar(256)
+            description: ""
           - name: updated_at
+            data_type: timestamp_ntz(9)
+            description: ""
           - name: address_id
+            data_type: varchar(256)
+            description: ""
           - name: last_name
+            data_type: varchar(256)
+            description: ""
           - name: created_at
+            data_type: timestamp_ntz(9)
+            description: ""
           - name: phone_number
+            data_type: varchar(256)
+            description: ""
           - name: total_orders
+            data_type: number(38,0)
+            description: ""
           - name: first_name
+            data_type: varchar(256)
+            description: ""
           - name: email
+            data_type: varchar(256)
+            description: ""
           - name: _fivetran_deleted
+            data_type: timestamp_ntz(9)
+            description: ""

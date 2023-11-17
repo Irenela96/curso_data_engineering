@@ -18,7 +18,7 @@ renamed_casted AS (
         last_name,
         created_at,
         phone_number,
-        total_orders,
+        DECODE(total_orders,NULL,0,total_orders) AS total_orders,
         first_name,
         email,
         _fivetran_synced AS date_load

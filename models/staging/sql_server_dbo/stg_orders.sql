@@ -12,19 +12,19 @@ WITH src_orders AS (
 
 renamed_casted AS (
     SELECT
-        order_id
-        shipping_service,
-        shipping_cost,
-        address_id,
+        order_id,
+        shipping_service, 
+        shipping_cost, --metrica
+        address_id, --dim: location
         created_at,
-        promo_id,
+        DECODE(promo_id,'','Sin promoción',promo_id) AS promo_id,
         estimated_delivery_at,
-        order_cost,
-        user_id,
-        order_total,
+        order_cost, --métrica
+        user_id, --> dim users
+        DECODE(order_total,NULL,0,order_total) AS order_total,
         delivered_at,
-        tracking_id,
-        status,
+        tracking_id, --> no hace falta sacarlo porque solo está en orders
+        status, 
         _fivetran_synced AS date_load
     FROM src_orders
     )

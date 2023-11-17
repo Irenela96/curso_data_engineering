@@ -13,7 +13,7 @@ WITH src_order_items AS (
 renamed_casted AS (
     SELECT
         order_id,
-        product_id
+        product_id,
         quantity,
         _fivetran_synced AS date_load
     FROM src_order_items
