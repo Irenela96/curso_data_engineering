@@ -12,10 +12,10 @@ WITH src_promos AS (
 
 renamed_casted AS (
     SELECT
-        promo_id,
-        discount,
-        status,
-        _fivetran_synced AS date_load
+        cast(promo_id as varchar(50)) as promo_id,
+        cast(discount as float) as discount,
+        cast(status as varchar(50)) as status,
+        cast(_fivetran_synced as timestamp_ntz) as date_load
     FROM src_promos
     )
 

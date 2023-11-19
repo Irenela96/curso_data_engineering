@@ -12,20 +12,20 @@ WITH src_orders AS (
 
 renamed_casted AS (
     SELECT
-        order_id,
-        shipping_service, 
-        shipping_cost, --metrica
-        address_id, --dim: location
-        created_at,
-        DECODE(promo_id,'','Sin promoción',promo_id) AS promo_id,
-        estimated_delivery_at,
-        order_cost, --métrica
-        user_id, --> dim users
-        DECODE(order_total,NULL,0,order_total) AS order_total,
-        delivered_at,
-        tracking_id, --> no hace falta sacarlo porque solo está en orders
-        status, 
-        _fivetran_synced AS date_load
+        cast(order_id as varchar(50)) as order_id ,
+        cast(shipping_service as varchar(20)) as shipping_service, 
+        cast(shipping_cost as float) as shipping_cost, 
+        cast(address_id as varchar(50)) as address_id, 
+        cast(created_at as timestamp_ntz) as created_at,
+        cast(DECODE(promo_id,'','na',promo_id) as varchar(50)) as promo_id,
+        cast(estimated_delivery_at as timestamp_ntz) as estimated_delivery_at,
+        cast(order_cost as float) as order_cost, 
+        cast(user_id as varchar(50)) as user_id, 
+        cast(DECODE(order_total,NULL,0,order_total) as float) as order_total,
+        cast(delivered_at as timestamp_ntz) as delivered_at,
+        cast(tracking_id as varchar(50)) as tracking_id,
+        cast(DECODE(status,NULL,'na',status) as varchar(20)) as status,
+        cast(_fivetran_synced as timestamp_ntz) as date_load
     FROM src_orders
     )
 

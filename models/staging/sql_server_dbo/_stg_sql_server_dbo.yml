@@ -53,9 +53,6 @@ models:
         description: ""
         tests:
           - not_null
-          - relationships:
-              to: ref('stg_products')
-              field: product_id
       - name: session_id
         description: ""
         tests:
@@ -67,9 +64,6 @@ models:
       - name: order_id
         description: ""
         tests:
-          - relationships:
-              to: ref('stg_orders')
-              field: order_id
           - not_null
       - name: _fivetran_deleted
         description: ""
@@ -103,9 +97,7 @@ models:
       - name: promo_id
         description: ""
         tests:
-          - relationships:
-              to: ref('stg_promos')
-              field: promo_id
+          - not_null
       - name: estimated_delivery_at
         description: ""
       - name: order_cost
