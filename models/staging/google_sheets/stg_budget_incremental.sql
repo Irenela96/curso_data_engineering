@@ -1,28 +1,22 @@
--- scd tipo 1: Dimension is overwritten
-{{ config(
-    materialized='incremental',
-    unique_key = '_row' 
-    ) 
-    }}
+-- Si se intenta cambiar el schema, da un "fail" -->
+-- https://docs.getdbt.com/docs/build/incremental-models
+{{ config(materialized="incremental", unique_key="_row", on_schema_change="fail") }}
 
-WITH stg_budget_incremental AS (
-    SELECT * 
-    FROM {{ source('google_sheets','budget') }}
--- el filtro es mejor meterlo ahí por eficiencia del programa
-{% if is_incremental() %} -- si existe el histórico...
+with
+    stg_budget_incremental as (
+        select *
+        from {{ source("google_sheets", "budget") }}
+        -- el filtro es mejor meterlo ahí por eficiencia del programa
+        {% if is_incremental() %}  -- si existe el histórico...
 
-	  where _fivetran_synced > (select max(_fivetran_synced) from {{ this }}) -- this indica este mismo modelo
+            where _fivetran_synced > (select max(_fivetran_synced) from {{ this }})  -- this indica este mismo modelo
 
-{% endif %}
+        {% endif %}
     ),
 
-renamed_casted AS (
-    SELECT
-          _row
-        , month
-        , quantity 
-        , _fivetran_synced
-    FROM stg_budget_incremental
+    renamed_casted as (
+        select _row, month, quantity, _fivetran_synced from stg_budget_incremental
     )
 
-SELECT * FROM renamed_casted
+select *
+from renamed_casted
