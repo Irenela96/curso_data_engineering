@@ -81,8 +81,10 @@ models:
       - name: promo_id
         tests:
           - not_null
+          - relationships:
+              to: ref('stg_promos')
+              field: promo_id          
       - name: estimated_delivery_at
-
       - name: order_cost
         tests:
           - not_null
@@ -153,6 +155,9 @@ models:
         tests:
           - not_null
           - unique
+      - name: des_promo
+        test:
+          - not_null
       - name: discount
         tests:
           - not_null
