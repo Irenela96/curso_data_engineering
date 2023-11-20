@@ -1,8 +1,9 @@
+-- scd tipo 1: Dimension is overwritten
 {{ config(
-    materialized='incremental'
+    materialized='incremental',
+    unique_key = '_row' 
     ) 
     }}
-
 
 WITH stg_budget_incremental AS (
     SELECT * 
