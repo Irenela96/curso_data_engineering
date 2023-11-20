@@ -37,164 +37,186 @@ sources:
           - name: _fivetran_deleted
             data_type: boolean
             description: "Momento en el que se borró el registro en fivetran"
+          - name: _fivetran_synced
+            data_type: boolean
+            description: "Momento en el que se añadió el registro en fivetran"
       - name: events
         loaded_at_field: _fivetran_synced
         columns:
           - name: event_id
             data_type: varchar(1024)
-            description: ""
+            description: "Identificador del evento que se inicia cuando el usuario entra en la web"
           - name: page_url
             data_type: varchar(1024)
-            description: ""
+            description: "Página web que el usuario ha consultado"
           - name: event_type
             data_type: varchar(1024)
-            description: ""
+            description: "Tipo de acción que realiza el usuario dentro de la web. Ej: 'checkout' O 'add_to_cart'"
           - name: user_id
             data_type: varchar(1024)
-            description: ""
+            description: "Identificador del cliente en la base de datos que está realizando el evento"
           - name: product_id
             data_type: varchar(1024)
-            description: ""
+            description: "Identificador del producto con el usuario está interactuando en la web"
           - name: session_id
             data_type: varchar(1024)
-            description: ""
+            description: "Identificador de la sesión que está llevando acabo el usuario. Este Identificador es único en todo el evento del usuario"
           - name: created_at
             data_type: timestamp_ntz(9)
-            description: ""
+            description: "Fecha en la que se creó el registro de evento"
           - name: order_id
             data_type: varchar(1024)
-            description: ""
+            description: "Identificador del pedido que se corresponde con dicho evento"
           - name: _fivetran_deleted
             data_type: boolean
-            description: ""
+            description: "Momento en el que se borró el registro en fivetran"
+          - name: _fivetran_synced
+            data_type: boolean
+            description: "Momento en el que se añadió el registro en fivetran"
 
       - name: orders
         loaded_at_field: _fivetran_synced
         columns:
           - name: order_id
             data_type: varchar(256)
-            description: ""
+            description: "Identificador del pedido realizado por el usuario"
           - name: shipping_service
             data_type: varchar(256)
-            description: ""
+            description: "Tipo de servicio utilizado para el envío"
           - name: shipping_cost
             data_type: float
-            description: ""
+            description: "Coste del envío del pedido"
           - name: address_id
             data_type: varchar(256)
-            description: ""
+            description: "Identificador que indica la dirección a la que se va a realizar el envío"
           - name: created_at
             data_type: timestamp_ntz(9)
-            description: ""
+            description: "Fecha en la que se creó el registro de envío"
           - name: promo_id
             data_type: varchar(256)
-            description: ""
+            description: "Identificador de la promoción que tiene este pedido"
           - name: estimated_delivery_at
             data_type: timestamp_ntz(9)
-            description: ""
+            description: "Fecha estimada del envío"
           - name: order_cost
             data_type: float
-            description: ""
+            description: "Coste del pedido sin incluir el coste de envío (shipping_cost)"
           - name: user_id
             data_type: varchar(256)
-            description: ""
+            description: "Identificador del usuario que ha realizado el pedido"
           - name: order_total
             data_type: float
-            description: ""
+            description: "Coste del pedido incluyendo el coste de envío (shipping_cost)"
           - name: delivered_at
             data_type: timestamp_ntz(9)
-            description: ""
+            description: "Fecha en la que se realizará el envío del pedido"
           - name: tracking_id
             data_type: varchar(256)
-            description: ""
+            description: "Identificador que recibe el pedido cuando su estatus deja de estar en 'preparación' y pasa a 'en envío' o 'enviado'"
           - name: status
             data_type: varchar(256)
-            description: ""
+            description: "Proceso por el que pasa el pedido desde que se prepara hasta que se envía"
           - name: _fivetran_deleted
             data_type: boolean
-            description: ""
+            description: "Momento en el que se borró el registro en fivetran"
+          - name: _fivetran_synced
+            data_type: boolean
+            description: "Momento en el que se añadió el registro en fivetran"
 
       - name: order_items
         loaded_at_field: _fivetran_synced
         columns:
           - name: order_id
             data_type: varchar(256)
-            description: ""
+            description: "Identificador del pedido"
           - name: product_id
             data_type: varchar(256)
-            description: ""
+            description: "Identificador del producto que se encuentra dentro de dicho pedido"
           - name: quantity
             data_type: number(38,0)
-            description: ""
+            description: "Cantidad de dicho producto en el envío"
           - name: _fivetran_deleted
             data_type: boolean
-            description: ""
+            description: "Momento en el que se borró el registro en fivetran"
+          - name: _fivetran_synced
+            data_type: boolean
+            description: "Momento en el que se añadió el registro en fivetran"
+
 
       - name: products
         loaded_at_field: _fivetran_synced
         columns:
           - name: product_id
             data_type: varchar(256)
-            description: ""
+            description: "Identificador del producto"
           - name: price
             data_type: float
-            description: ""
+            description: "Precio del producto"
           - name: name
             data_type: varchar(256)
-            description: ""
+            description: "Nombre del producto"
           - name: inventory
             data_type: number(38,0)
-            description: ""
+            description: "Stock de productos"
           - name: _fivetran_deleted
             data_type: boolean
-            description: ""
+            description: "Momento en el que se borró el registro en fivetran"
+          - name: _fivetran_synced
+            data_type: boolean
+            description: "Momento en el que se añadió el registro en fivetran"
 
       - name: promos
         loaded_at_field: _fivetran_synced
         columns:
           - name: promo_id
             data_type: varchar(256)
-            description: ""
+            description: "Identificador de la promoción"
           - name: discount
             data_type: number(38,0)
-            description: ""
+            description: "Descuento que tiene dicha promoción"
           - name: status
             data_type: varchar(256)
-            description: ""
+            description: "Estatus de la promoción que puede ser activa o inactiva"
           - name: _fivetran_deleted
             data_type: boolean
-            description: ""
+            description: "Momento en el que se borró el registro en fivetran"
+          - name: _fivetran_synced
+            data_type: boolean
+            description: "Momento en el que se añadió el registro en fivetran"
 
       - name: users
         loaded_at_field: _fivetran_synced
         columns:
           - name: user_id
             data_type: varchar(256)
-            description: ""
+            description: "Identificador de usuario"
           - name: updated_at
             data_type: timestamp_ntz(9)
-            description: ""
+            description: "Fecha en la que se actualizó el registro del usuario"
           - name: address_id
             data_type: varchar(256)
-            description: ""
+            description: "Identificador de la dirección del usuario"
           - name: last_name
             data_type: varchar(256)
-            description: ""
+            description: "Apellidos del usuario"
           - name: created_at
             data_type: timestamp_ntz(9)
-            description: ""
+            description: "Fecha en la que se creó el registro del usuario"
           - name: phone_number
             data_type: varchar(256)
-            description: ""
+            description: "Número de teléfono del usuario"
           - name: total_orders
             data_type: number(38,0)
-            description: ""
+            description: "Número total de pedidos realizados por el usuario"
           - name: first_name
             data_type: varchar(256)
-            description: ""
+            description: "Nombre del usuario"
           - name: email
             data_type: varchar(256)
-            description: ""
+            description: "Email del usuario"
           - name: _fivetran_deleted
-            data_type: timestamp_ntz(9)
-            description: ""
+            data_type: boolean
+            description: "Momento en el que se borró el registro en fivetran"
+          - name: _fivetran_synced
+            data_type: boolean
+            description: "Momento en el que se añadió el registro en fivetran"

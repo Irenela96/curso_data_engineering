@@ -12,7 +12,7 @@ WITH src_promos AS (
 
 renamed_casted AS (
     SELECT
-        cast(promo_id as varchar(50)) as promo_id,
+        cast(DECODE(promo_id,'','Sin promo',promo_id) as varchar(50)) as promo_id,
         cast(discount as float) as discount,
         cast(status as varchar(50)) as status,
         cast(_fivetran_synced as timestamp_ntz) as date_load
