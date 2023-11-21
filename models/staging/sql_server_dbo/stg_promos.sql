@@ -10,7 +10,7 @@ with
             cast(promo_id as varchar(50)) as des_promo,
             cast(discount as float) as discount,
             cast(status as varchar(50)) as status,
-            cast(_fivetran_synced as timestamp_ntz) as date_load
+            convert_timezone('UTC', _fivetran_synced) as date_load_utc
         from src_promos
     )
 

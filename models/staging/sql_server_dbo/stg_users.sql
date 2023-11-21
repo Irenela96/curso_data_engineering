@@ -6,17 +6,15 @@ with
     renamed_casted as (
         select
             cast(user_id as varchar(50)) as user_id,
-            cast(updated_at as timestamp_ntz) as updated_at,
+            convert_timezone('UTC', updated_at) as updated_at_utc,
             cast(address_id as varchar(50)) as address_id,
             cast(last_name as varchar(50)) as last_name,
-            cast(created_at as timestamp_ntz) as created_at,
+            convert_timezone('UTC', created_at) as created_at_utc,
             cast(phone_number as varchar(20)) as phone_number,
-            cast(
-                decode(total_orders, null, 0, total_orders) as varchar(50)
-            ) as total_orders,
+            cast(coalesce(total_orders, '9999') as varchar(50)) as total_orders,
             cast(first_name as varchar(50)) as first_name,
             cast(email as varchar(100)) as email,
-            cast(_fivetran_synced as timestamp_ntz) as date_load
+            convert_timezone('UTC', _fivetran_synced) as date_load_utc
         from src_users
     )
 

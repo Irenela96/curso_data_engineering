@@ -9,7 +9,7 @@ with
             cast(price as float) as price,
             cast(name as varchar(100)) as name,
             cast(inventory as number(38, 0)) as inventory,
-            cast(_fivetran_synced as timestamp_ntz) as date_load
+            convert_timezone('UTC', _fivetran_synced) as date_load_utc
         from src_products
     )
 

@@ -15,14 +15,14 @@ with
                     promo_id, '', '9999', {{ dbt_utils.surrogate_key(["promo_id"]) }}
                 ) as varchar(50)
             ) as promo_id,
-            cast(estimated_delivery_at as timestamp_ntz) as estimated_delivery_at,
+            convert_timezone('UTC', estimated_delivery_at) as estimated_delivery_at
             cast(order_cost as float) as order_cost,
             cast(user_id as varchar(50)) as user_id,
-            cast(decode(order_total, null, 0, order_total) as float) as order_total,
-            cast(delivered_at as timestamp_ntz) as delivered_at,
+            cast(coalesce(order_total, 0) as float) as order_total,
+            convert_timezone('UTC', delivered_at) as delivered_at
             cast(tracking_id as varchar(50)) as tracking_id,
-            cast(decode(status, null, '9999', status) as varchar(20)) as status,
-            cast(_fivetran_synced as timestamp_ntz) as date_load
+            cast(coalesce(status, '9999') as varchar(20)) as status,
+            convert_timezone('UTC', _fivetran_synced) as date_load
         from src_orders
     )
 
