@@ -1,6 +1,6 @@
 {{ 
     config(
-        materialized='table', 
+        materialized='incremental', 
         sort='date_day',
         dist='date_day',
         pre_hook="alter session set timezone = 'UTC'; alter session set week_start = 7;" 
