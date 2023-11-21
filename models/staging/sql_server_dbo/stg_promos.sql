@@ -8,7 +8,7 @@ with
                 {{ dbt_utils.surrogate_key(["promo_id"]) }} as varchar(50)
             ) as promo_id,
             cast(promo_id as varchar(50)) as des_promo,
-            cast(discount as float) as discount,
+            cast(discount as float) as discount_percentage,
             cast(status as varchar(50)) as status,
             convert_timezone('UTC', _fivetran_synced) as date_load_utc
         from src_promos
