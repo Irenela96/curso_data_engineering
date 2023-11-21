@@ -16,9 +16,9 @@ models:
       - name: quantity
         tests:
           - not_null   
-      - name: month
+      - name: date_utc
         tests:
           - not_null
-      - name: date_load
+      - name: date_load_utc
         tests:
           - not_null

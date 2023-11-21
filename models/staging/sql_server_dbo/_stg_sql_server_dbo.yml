@@ -19,7 +19,7 @@ models:
       - name: state
         tests:
           - not_null
-      - name: _fivetran_synced
+      - name: date_load_utc
       - name: _fivetran_deleted
 
 
@@ -47,13 +47,13 @@ models:
       - name: session_id
         tests:
           - not_null
-      - name: created_at
+      - name: created_at_utc
         tests:
           - not_null
       - name: order_id
         tests:
           - not_null
-      - name: _fivetran_synced
+      - name: date_load_utc
       - name: _fivetran_deleted
 
 
@@ -66,7 +66,7 @@ models:
       - name: shipping_service
         tests:
           - not_null
-      - name: shipping_cost
+      - name: shipping_cost_dollars
         tests:
           - not_null
       - name: address_id
@@ -75,7 +75,7 @@ models:
           - relationships:
               to: ref('stg_addresses')
               field: address_id
-      - name: created_at
+      - name: created_at_utc
         tests:
           - not_null
       - name: promo_id
@@ -84,8 +84,8 @@ models:
           - relationships:
               to: ref('stg_promos')
               field: promo_id          
-      - name: estimated_delivery_at
-      - name: order_cost
+      - name: estimated_delivery_at_utc
+      - name: order_cost_dollars
         tests:
           - not_null
       - name: user_id
@@ -94,10 +94,10 @@ models:
           - relationships:
               to: ref('stg_users')
               field: user_id
-      - name: order_total
+      - name: order_total_dollars
         tests:
           - not_null
-      - name: delivered_at
+      - name: delivery_at_utc
 
       - name: tracking_id
         tests:
@@ -105,7 +105,7 @@ models:
       - name: status
         tests:
           - not_null
-      - name: _fivetran_synced
+      - name: date_load_utc
       - name: _fivetran_deleted
 
 
@@ -126,7 +126,7 @@ models:
       - name: quantity
         tests:
           - not_null
-      - name: _fivetran_synced
+      - name: date_load_utc
       - name: _fivetran_deleted
 
 
@@ -136,7 +136,7 @@ models:
         tests:
           - not_null
           - unique
-      - name: price
+      - name: price_dollars
         tests:
           - not_null
       - name: name
@@ -145,7 +145,7 @@ models:
       - name: inventory
         tests:
           - not_null
-      - name: _fivetran_synced
+      - name: date_load_utc
       - name: _fivetran_deleted
 
 
@@ -156,15 +156,15 @@ models:
           - not_null
           - unique
       - name: des_promo
-        test:
+        tests:
           - not_null
-      - name: discount
+      - name: discount_percentage
         tests:
           - not_null
       - name: status
         tests:
           - not_null
-      - name: _fivetran_synced
+      - name: date_load_utc
       - name: _fivetran_deleted
 
 
@@ -174,7 +174,7 @@ models:
         tests:
           - not_null
           - unique
-      - name: updated_at
+      - name: updated_at_utc
         tests:
           - not_null
       - name: address_id
@@ -186,7 +186,7 @@ models:
       - name: last_name
         tests:
           - not_null
-      - name: created_at
+      - name: created_at_utc
         tests:
           - not_null
       - name: phone_number
@@ -201,5 +201,5 @@ models:
       - name: email
         tests:
           - not_null
-      - name: _fivetran_synced
+      - name: date_load_utc
       - name: _fivetran_deleted
