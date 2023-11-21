@@ -1,22 +1,31 @@
-{{ config(materialized="table") }}
+{{ 
+    config(
+        materialized='table', 
+        sort='date_day',
+        dist='date_day',
+        pre_hook="alter session set timezone = 'UTC'; alter session set week_start = 7;" 
+        ) }}
 
-with
-    cte_my_date as (
-        select dateadd(hour, seq4(), '2021-02-10 08:00:05.000 +0000') as my_date
-        from table(generator(rowcount => 50000))
+with date as (
+    {{ dbt_utils.date_spine(
+        datepart="day",
+        start_date="cast('2000-01-01' as date)",
+        end_date="cast(current_date()+1 as date)"
     )
+    }}  
+)
+
+
 select
-    cast({{ dbt_utils.surrogate_key(["my_date"]) }} as varchar(50)) as time_id,
-    convert_timezone('UTC', my_date) as date_utc,
-    to_timestamp(my_date) as date_timestamp_ntz,
-    to_date(my_date) as date_date,
-    to_time(my_date) as time,
-    year(my_date) as year,
-    month(my_date) as month,
-    monthname(my_date) as month_name,
-    day(my_date) as day,
-    dayofweek(my_date) as day_of_week,
-    weekofyear(my_date) as week_of_year,
-    dayofyear(my_date) as day_of_year,
-    hour(my_date) as hour
-from cte_my_date
+      date_day as fecha_forecast
+    , year(date_day)*10000+month(date_day)*100+day(date_day) as id_date
+    , year(date_day) as anio
+    , month(date_day) as mes
+    ,monthname(date_day) as desc_mes
+    , year(date_day)*100+month(date_day) as id_anio_mes
+    , date_day-1 as dia_previo
+    , year(date_day)||weekiso(date_day)||dayofweek(date_day) as anio_semana_dia
+    , weekiso(date_day) as semana
+from date
+order by
+    date_day desc
