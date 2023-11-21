@@ -10,7 +10,7 @@ with
             cast(country as varchar(50)) as country,
             cast(address as varchar(150)) as address,
             cast(state as varchar(50)) as state,
-            cast(_fivetran_synced as timestamp_ntz) as date_load
+            convert_timezone('UTC', _fivetran_synced) as date_load_utc
         from src_addresses
     )
 
