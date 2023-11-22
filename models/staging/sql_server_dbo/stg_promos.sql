@@ -22,4 +22,4 @@ select
     'Sin promo' as des_promo,
     '0' as discount,
     'inactive' as status,
-    {{ dbt_date.now("America/New_York") }} as date_load
+    convert_timezone('UTC', {{ dbt_date.now("America/New_York") }}) as date_load_utc
