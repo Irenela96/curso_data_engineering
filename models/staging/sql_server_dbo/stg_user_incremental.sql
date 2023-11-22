@@ -16,3 +16,6 @@ with
 
 select *
 from renamed_casted
+{% if is_incremental() %}  -- si existe el histórico...
+        where f_carga > (select max(f_carga) from {{ this }})  -- this indica este mismo modelo
+{% endif %}
