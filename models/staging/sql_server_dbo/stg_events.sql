@@ -13,8 +13,8 @@ with
                 decode(product_id, '', '9999', product_id) as varchar(50)
             ) as product_id,
             cast(session_id as varchar(50)) as session_id,
-            convert_timezone('UTC', created_at) as created_at_utc,
             cast(decode(order_id, '', '9999', order_id) as varchar(50)) as order_id,
+            convert_timezone('UTC', created_at) as created_at_utc,            
             convert_timezone('UTC', _fivetran_synced) as date_load_utc
         from src_events
     )

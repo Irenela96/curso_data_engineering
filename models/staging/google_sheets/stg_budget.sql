@@ -1,11 +1,11 @@
-{{ config(materialized="view") }}
+{{ config(materialized="table") }}
 
 with
     src_budget_products as (select * from {{ source("google_sheets", "budget") }}),
 
     renamed_casted as (
         select
-            cast({{ dbt_utils.surrogate_key(["_row"]) }} as varchar(50)) as _row,
+            cast({{ dbt_utils.surrogate_key(["_row"]) }} as varchar(50)) as budget_id,
             cast(product_id as varchar(50)) as product_id,
             cast(quantity as number(38, 0)) as quantity,
             convert_timezone('UTC', month) as date_utc,
