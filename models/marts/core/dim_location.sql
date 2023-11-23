@@ -1,4 +1,4 @@
-{{ config(materialized="table") }}
+{{ config(materialized="view") }}
 
 with
     stag_addresses as (select * from  {{ ref("stg_addresses")}})

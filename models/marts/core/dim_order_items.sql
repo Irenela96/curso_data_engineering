@@ -1,13 +1,7 @@
-{{ config(materialized="table") }}
+{{ config(materialized="view") }}
 
 with
-    stag_order_items as (select * from {{ ref('stg_order_items') }}),
-
-    cte as (
-        select
-            
-        from stag_order_items_id
-    )
+    stag_order_items as (select * from {{ ref('stg_order_items') }})
 
 select *
-from cte
+from stag_order_items

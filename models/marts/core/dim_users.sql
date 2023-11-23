@@ -1,4 +1,4 @@
-{{ config(materialized="table") }}
+{{ config(materialized="view") }}
 
 with
     stag_users as (select * from {{ ref('stg_users') }}),
