@@ -34,7 +34,7 @@ with
     ),
     cte1 as (
         select
-            {{ dbt_utils.surrogate_key(["order_id"]) }} as order_id,
+            {{ dbt_utils.generate_surrogate_key(["order_id"]) }} as order_id,
             order_items_id,
             user_id,
             address_id,

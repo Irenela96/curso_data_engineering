@@ -5,7 +5,7 @@ with
     renamed_casted as (
         select
             cast(
-                {{ dbt_utils.surrogate_key(["promo_id"]) }} as varchar(50)
+                {{ dbt_utils.generate_surrogate_key(["promo_id"]) }} as varchar(50)
             ) as promo_id,
             cast(promo_id as varchar(50)) as des_promo,
             cast(discount as float) as discount_percentage,
