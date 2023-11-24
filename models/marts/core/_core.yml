@@ -132,6 +132,36 @@ models:
         data_type: timestamp_tz
         description: "Timestamp of when the data was loaded into the system."
 
+  - name: dim_order_status
+    description: "Dimension table containing information about the status of an order."
+    columns:
+      - name: status_id
+        data_type: varchar
+        description: "Unique identifier for each status of the order."
+        tests:
+          - not_null
+          - unique
+      - name: des_status
+        data_type: varchar
+        description: "Name or description of the status."
+        tests:
+          - not_null
+
+  - name: dim_shipping_services
+    description: "Dimension table containing information about shipping services."
+    columns:
+      - name: shipping_service_id
+        data_type: varchar
+        description: "Unique identifier for each shipping enterprise."
+        tests:
+          - not_null
+          - unique
+      - name: des_shipping_service
+        data_type: varchar
+        description: "Name or description of the status."
+        tests:
+          - not_null
+
   - name: dim_promos
     description: "Dimension table containing information about promotions."
     columns:
@@ -335,3 +365,5 @@ models:
       - name: date_load_utc
         data_type: timestamp_tz
         description: "Timestamp of when the data was loaded into the system."
+
+
