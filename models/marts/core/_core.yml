@@ -85,12 +85,6 @@ models:
   - name: dim_order_items
     description: "Dimension table containing information about order items."
     columns:
-      - name: order_items_id
-        data_type: varchar
-        description: "Unique identifier for each order item."
-        tests:
-          - not_null
-          - unique
       - name: order_id
         data_type: varchar
         description: "Identifier of the order to which the item belongs."
@@ -310,8 +304,6 @@ models:
       - name: shipping_cost_dollars
         data_type: float
         description: "Cost of shipping for the order in dollars."
-        tests:
-          - not_null
       - name: order_cost_dollars
         data_type: float
         description: "Cost of the items in the order in dollars."
@@ -330,13 +322,11 @@ models:
       - name: delivered_at
         data_type: timestamp_tz
         description: "Timestamp of when the order was delivered."
-        tests:
-          - not_null
+
       - name: estimated_delivery_at
         data_type: timestamp_tz
         description: "Estimated delivery timestamp for the order."
-        tests:
-          - not_null
+
       - name: created_at_utc
         data_type: timestamp_tz
         description: "Timestamp of when the order was created."

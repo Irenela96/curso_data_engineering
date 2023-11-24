@@ -3,8 +3,9 @@ version: 2
 models:
   - name: stg_budget
     columns:
-      - name: _row
+      - name: budget_id
         tests:
+          - not_null
           - unique
       - name: product_id         
         tests:
