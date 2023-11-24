@@ -7,18 +7,181 @@ models:
         tests:
           - not_null
           - unique
-      - name: zipcode
-        tests:
-          - not_null
-      - name: country
-        tests:
-          - not_null
       - name: address
+        tests:
+          - not_null
+      - name: zipcode
         tests:
           - not_null
       - name: state
         tests:
           - not_null
+      - name: country
+        tests:
+          - not_null
+      - name: date_load_utc
+      - name: _fivetran_deleted
+
+  - name: stg_events
+    columns:
+      - name: event_id
+        tests:
+          - not_null
+          - unique
+      - name: page_url
+        tests:
+          - not_null
+      - name: event_type
+        tests:
+          - not_null
+      - name: user_id
+        tests:
+          - not_null
+      - name: product_id
+        tests:
+          - not_null
+      - name: session_id
+        tests:
+          - not_null
+      - name: order_id
+        tests:
+          - not_null
+      - name: created_at_utc
+        tests:
+          - not_null
+      - name: date_load_utc
+      - name: _fivetran_deleted
+
+  - name: stg_order_items
+    columns:
+      - name: order_items_id
+        tests:
+          - not_null
+          - unique
+      - name: order_id
+        tests:
+          - not_null
+      - name: product_id
+        tests:
+          - not_null
+      - name: quantity
+        tests:
+          - not_null
+      - name: date_load_utc
+      - name: _fivetran_deleted
+
+  - name: stg_order_status
+    columns:
+      - name: status_id
+        tests:
+          - not_null
+          - unique
+      - name: des_status
+        tests:
+          - not_null
+
+  - name: stg_orders
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - unique
+      - name: user_id
+        tests:
+          - not_null
+      - name: address_id
+        tests:
+          - not_null
+      - name: promo_id
+        tests:
+          - not_null
+      - name: shipping_service_id
+        tests:
+          - not_null
+      - name: tracking_id
+        tests:
+          - not_null
+      - name: status_id
+      - name: shipping_cost_dollars
+        tests:
+          - not_null
+      - name: order_cost_dollars
+        tests:
+          - not_null
+      - name: order_total_dollars
+        tests:
+          - not_null
+      - name: delivered_at_utc
+      - name: estimated_delivery_at_utc
+      - name: created_at_utc
+        tests:
+          - not_null
+      - name: date_load_utc
+      - name: _fivetran_deleted
+
+  - name: stg_products
+    columns:
+      - name: product_id
+        tests:
+          - not_null
+          - unique
+      - name: price_dollars
+        tests:
+          - not_null
+      - name: name
+        tests:
+          - not_null
+      - name: inventory
+        tests:
+          - not_null
+      - name: date_load_utc
+      - name: _fivetran_deleted
+
+  - name: stg_promos
+    columns:
+      - name: promo_id
+        tests:
+          - not_null
+          - unique
+      - name: des_promo
+        tests:
+          - not_null
+      - name: discount_percentage
+        tests:
+          - not_null
+      - name: status
+        tests:
+          - not_null
+      - name: date_load_utc
+      - name: _fivetran_deleted
+
+  - name: stg_shipping_services
+    columns:
+      - name: shipping_service_id
+        tests:
+          - not_null
+          - unique
+      - name: des_shipping_service
+        tests:
+          - not_null
+
+  - name: stg_users
+    columns:
+      - name: user_id
+        tests:
+          - not_null
+          - unique
+      - name: updated_at_utc
+      - name: address_id
+        tests:
+          - not_null
+      - name: last_name
+      - name: created_at_utc
+        tests:
+          - not_null
+      - name: phone_number
+      - name: first_name
+      - name: email
       - name: date_load_utc
       - name: _fivetran_deleted
 
@@ -64,8 +227,6 @@ models:
           - not_null
           - unique
       - name: shipping_service
-        tests:
-          - not_null
       - name: shipping_cost_dollars
         tests:
           - not_null

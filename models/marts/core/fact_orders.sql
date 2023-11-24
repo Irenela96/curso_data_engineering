@@ -14,7 +14,6 @@ with
             o.created_at_utc,
             status_id,
             e.event_id,
-            oi.order_items,
             order_cost_dollars,
             order_total_dollars,
             delivered_at_utc,
@@ -23,7 +22,6 @@ with
             date_load_utc
         from stag_orders o
         join stag_events e on o.order_id = e.order_id
-        join stag_order_items oi on o.order_id = oi.order_id 
     )
 
 
