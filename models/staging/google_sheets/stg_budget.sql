@@ -5,7 +5,7 @@ with
 
     renamed_casted as (
         select
-            cast({{ dbt_utils.surrogate_key(["_row"]) }} as varchar(50)) as budget_id,
+            cast({{ dbt_utils.generate_surrogate_key(["_row"]) }} as varchar(50)) as budget_id,
             cast(product_id as varchar(50)) as product_id,
             cast(quantity as number(38, 0)) as quantity,
             convert_timezone('UTC', month) as date_utc,
