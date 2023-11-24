@@ -16,8 +16,8 @@ with
             cast(shipping_cost as float) as shipping_cost_dollars,
             cast(order_cost as float) as order_cost_dollars,
             cast(coalesce(order_total, 0) as float) as order_total_dollars,
-            convert_timezone('UTC', delivered_at) as delivered_at,
-            convert_timezone('UTC', estimated_delivery_at) as estimated_delivery_at,
+            convert_timezone('UTC', delivered_at) as delivered_at_utc,
+            convert_timezone('UTC', estimated_delivery_at) as estimated_delivery_at_utc,
             convert_timezone('UTC', created_at) as created_at_utc,
             convert_timezone('UTC', _fivetran_synced) as date_load_utc
         from src_orders
