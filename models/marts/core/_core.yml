@@ -282,6 +282,14 @@ models:
       - name: order_total_dollars
         data_type: float
         description: "Total cost of the order in dollars."
+      
+      - name: num_orders_user
+        data_type: float
+        description: "tells us the order number based on the total number of orders that this user has ordered. Ex: num_orders_user = 1 and total_num_orders_user = 5. This tells us that this order is the first order that the user has placed out of a total of 5 orders that he/she has placed."
+
+      - name: total_num_orders_user
+        data_type: float
+        description: "number of orders that customer has placed on the website"
 
       - name: status_id
         data_type: varchar
