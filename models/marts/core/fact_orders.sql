@@ -1,4 +1,10 @@
-{{ config(materialized="view") }}
+{{
+    config(
+        materialized='incremental',
+        unique_key='order_details_id',
+        on_schema_change='fail'
+    )
+}}
 
 with
     stag_orders as (select * from {{ ref("stg_orders") }}),
@@ -49,12 +55,16 @@ with
             order_cost_dollars,
             order_total_dollars,
             created_at_utc,
-            delivered_at_utc,
-            datediff(day,created_at_utc,delivered_at_utc) order_time_days,
             estimated_delivery_at_utc,
+            delivered_at_utc,
+            round(datediff(day,created_at_utc,delivered_at_utc)) order_time_days,    
             date_load_utc
         from cte
     )
 
 select *
 from cte1
+
+{% if is_incremental() %}
+where date_load_utc > (select max(date_load_utc) from {{ this }})
+{% endif %}
