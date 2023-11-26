@@ -17,4 +17,4 @@ with
     )
 
 select *
-from stag_events
+from cte1
