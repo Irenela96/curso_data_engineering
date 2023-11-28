@@ -10,12 +10,20 @@ fact_orders as (select * from {{ ref("fact_orders") }}),
 
 dim_promos as (select * from {{ ref("dim_promos") }}),
 
+dim_order_items_diff as (
+    select
+        order_id,
+        count(product_id) num_products_dif
+    from {{ ref("dim_order_items") }}
+    group by order_id
+),
 dim_order_items as (
     select
         order_id,
-        count(product_id) num_products
+        sum(quantity) num_products
     from {{ ref("dim_order_items") }}
-    group by order_id
+    group by
+        order_id
 ),
 
 cte1 as (
@@ -35,12 +43,15 @@ cte1 as (
         order_cost_dollars as total_order_cost_usd,
         shipping_cost_dollars as total_shipping_cost_usd,
         discount_percentage as total_discount_usd,
-        oi.num_products as total_quantity_products
+        oi.num_products as total_quantity_products,
+        oi.num_products,
+        oid.num_products_dif
     from dim_users as u
     inner join dim_location as l on u.address_id = l.address_id
     inner join fact_orders as o on u.user_id = o.user_id
     inner join dim_promos as p on o.promo_id = p.promo_id
     inner join dim_order_items as oi on o.order_items_id = oi.order_id
+    inner join dim_order_items_diff as oid on o.order_items_id = oid.order_id
 )
 
 select *
