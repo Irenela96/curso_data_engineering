@@ -44,8 +44,7 @@ cte1 as (
         shipping_cost_dollars as total_shipping_cost_usd,
         discount_percentage as total_discount_usd,
         oi.num_products as total_quantity_products,
-        oi.num_products,
-        oid.num_products_dif
+        oid.num_products_dif as total_dif_products
     from dim_users as u
     inner join dim_location as l on u.address_id = l.address_id
     inner join fact_orders as o on u.user_id = o.user_id
