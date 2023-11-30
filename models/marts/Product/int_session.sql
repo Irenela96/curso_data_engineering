@@ -1,5 +1,5 @@
 {{ config(materialized="view") }}
-{%- set keywords = obtener_valores(ref("stg_events"), 'event_type') -%}
+{%- set keywords = obtener_valores(ref("dim_events"), 'event_type') -%}
 
 with
     dim_events as (select * from  {{ ref("dim_events")}}),

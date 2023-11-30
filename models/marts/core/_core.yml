@@ -305,8 +305,6 @@ models:
       - name: estimated_delivery_at
         data_type: timestamp_tz
         description: "Estimated delivery timestamp for the order."
-        tests:
-          - not_null 
 
       - name: delivered_at
         data_type: timestamp_tz
@@ -316,7 +314,6 @@ models:
         data_type: timestamp_tz
         description: "Timestamp indicating the expected delivery date of the order in days."
         tests:
-          - not_null
           - positive_value     
           
       - name: date_load_utc

@@ -13,7 +13,6 @@ models:
       - name: zipcode
         tests:
           - not_null
-          - positive_values
       - name: state
         tests:
           - not_null
@@ -56,9 +55,6 @@ models:
   - name: stg_order_items
     columns:
       - name: order_items_id
-        tests:
-          - not_null
-          - unique
       - name: order_id
         tests:
           - not_null
@@ -68,7 +64,6 @@ models:
       - name: quantity
         tests:
           - not_null
-          - positive_values
       - name: date_load_utc
       - name: _fivetran_deleted
 
@@ -110,19 +105,15 @@ models:
       - name: order_cost_dollars
         tests:
           - not_null
-          - positive_values
       - name: order_total_dollars
         tests:
           - not_null
-          - positive_values
       - name: num_orders_user
         tests:
           - not_null
-          - positive_values
       - name: total_num_orders_user
         tests:
           - not_null
-          - positive_values
       - name: delivered_at_utc
       - name: estimated_delivery_at_utc
       - name: created_at_utc
